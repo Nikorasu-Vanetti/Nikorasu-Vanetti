@@ -1,0 +1,47 @@
+name: Refresh profile
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # diario, 06:17 UTC
+  push:
+    branches: [main]
+    paths-ignore:
+      - "assets/**"
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-profile
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate assets and README
+        env:
+          # METRICS_TOKEN ve repos privados; si no existe cae al token del repo.
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python generate.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets README.md
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: refresh profile [skip ci]"
+            git push
+          fi
