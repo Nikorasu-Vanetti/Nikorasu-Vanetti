@@ -351,28 +351,36 @@ def header_svg(top_lang, roles):
     # ---- velo para legibilidad del texto ----
     parts.append(f'<rect x="0" y="0" width="{W}" height="{H}" rx="18" fill="url(#scrim)"/>')
 
-    # ---- pill de estado (ancho calculado para que el texto no se salga) ----
+    # ---- pill de estado (ancho holgado + texto centrado: nunca se sale) ----
     pill_txt = "available . open to work"
-    pill_w = 44 + int(len(pill_txt) * 7.3)
+    txt_w = int(len(pill_txt) * 7.8)        # ancho estimado del texto (mono 12, holgado)
+    pill_x, pill_lead = 56, 30              # margen del punto LED
+    pill_w = pill_lead + 14 + txt_w + 18    # punto + gap + texto + padding
+    txt_cx = pill_x + pill_lead + 14 + txt_w // 2
     parts.append('<g class="fade">')
-    parts.append(f'<rect x="56" y="40" width="{pill_w}" height="30" rx="15" fill="#0d1640" '
+    parts.append(f'<rect x="{pill_x}" y="40" width="{pill_w}" height="30" rx="15" fill="#0d1640" '
                  f'stroke="#2dd4bf" stroke-width="1.2"/>')
-    parts.append('<circle cx="76" cy="55" r="5" fill="#34d399" class="led" filter="url(#glow)"/>')
-    parts.append(f'<text x="92" y="59" fill="{silk}" class="mono" font-size="12" '
-                 f'letter-spacing="0.5">{esc(pill_txt)}</text>')
+    parts.append(f'<circle cx="{pill_x + 20}" cy="55" r="5" fill="#34d399" class="led" '
+                 f'filter="url(#glow)"/>')
+    parts.append(f'<text x="{txt_cx}" y="59" fill="{silk}" class="mono" font-size="12" '
+                 f'text-anchor="middle" stroke="#000000" stroke-width="2.2" paint-order="stroke" '
+                 f'stroke-linejoin="round">{esc(pill_txt)}</text>')
     parts.append('</g>')
 
     # ---- nombre con gradiente animado ----
     parts.append(f'<text x="58" y="156" font-size="38" font-weight="800" letter-spacing="0.5" '
-                 f'fill="url(#ng)" class="name">{esc(FULL_NAME)}</text>')
+                 f'fill="url(#ng)" stroke="#000000" stroke-width="4" paint-order="stroke" '
+                 f'stroke-linejoin="round" class="name">{esc(FULL_NAME)}</text>')
     parts.append(f'<text x="60" y="198" fill="#f0abfc" class="mono fade2" font-size="20" '
-                 f'font-weight="700" letter-spacing="4" filter="url(#glow)">aka {esc(ALIAS)}</text>')
+                 f'font-weight="700" letter-spacing="4" stroke="#000000" stroke-width="3" '
+                 f'paint-order="stroke" stroke-linejoin="round">aka {esc(ALIAS)}</text>')
 
     # ---- roles rotativos + cursor ----
     parts.append('<g class="fade2">')
     for i, ph in enumerate(roles[:3]):
-        parts.append(f'<text x="60" y="244" fill="#9fb3d8" class="mono role" font-size="15" '
-                     f'style="animation-delay:{i * 3:.0f}s">&gt; {esc(ph)}'
+        parts.append(f'<text x="60" y="244" fill="#cdd9f0" class="mono role" font-size="15" '
+                     f'stroke="#000000" stroke-width="2.4" paint-order="stroke" '
+                     f'stroke-linejoin="round" style="animation-delay:{i * 3:.0f}s">&gt; {esc(ph)}'
                      f'<tspan class="cur" fill="#fbbf24">_</tspan></text>')
     parts.append('</g>')
 
@@ -386,8 +394,9 @@ def header_svg(top_lang, roles):
         parts.append(f'<rect x="{xx}" y="276" width="{bw}" height="26" rx="13" fill="#0d1640" '
                      f'stroke="{c}" stroke-width="1.3"/>')
         parts.append(f'<circle cx="{xx + 14}" cy="289" r="4" fill="{c}"/>')
-        parts.append(f'<text x="{xx + 26}" y="293" fill="{silk}" class="mono" font-size="12">'
-                     f'{esc(label)}</text>')
+        parts.append(f'<text x="{xx + 26}" y="293" fill="{silk}" class="mono" font-size="12" '
+                     f'stroke="#000000" stroke-width="2" paint-order="stroke" '
+                     f'stroke-linejoin="round">{esc(label)}</text>')
         xx += bw + 12
     parts.append('</g>')
 
