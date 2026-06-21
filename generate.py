@@ -218,27 +218,22 @@ def write(path, content):
 # --------------------------------------------------------------------------- #
 #  SVG: cabecera PCB animada                                                   #
 # --------------------------------------------------------------------------- #
+def bg_data_uri():
+    """JPEG de fondo (generado por IA) incrustado en base64 para que GitHub lo
+    renderice dentro del SVG via <img> (las refs externas se bloquean ahi)."""
+    import base64
+    p = os.path.join(ASSETS, "header-bg.jpg")
+    if not os.path.exists(p):
+        return ""
+    with open(p, "rb") as f:
+        return "data:image/jpeg;base64," + base64.b64encode(f.read()).decode("ascii")
+
+
 def header_svg(top_lang, roles):
-    """Cabecera neon multicolor: circuito animado + nombre con gradiente que fluye
-    + roles rotativos. `roles` es una lista de frases que se alternan."""
+    """Cabecera: fondo IA (PCB neon) + nombre con gradiente que fluye, alias,
+    roles rotativos y pill de estado, todo con contorno negro para legibilidad."""
     W, H = 1000, 340
     silk = "#eaf2ff"
-    # Paleta neon repartida por los trazos del circuito.
-    NEON = ["#22d3ee", "#a855f7", "#f472b6", "#34d399",
-            "#fbbf24", "#60a5fa", "#fb7185", "#a3e635"]
-
-    # Trazos PCB que enmarcan el texto (arriba, abajo y zona del chip a la derecha).
-    traces = [
-        "M0,40 L150,40 L185,75 L360,75", "M0,86 L110,86 L150,46 L250,46",
-        "M0,300 L140,300 L180,260 L380,260", "M0,256 L90,256 L130,296 L300,296",
-        "M1000,52 L840,52 L800,92 L660,92", "M1000,300 L860,300 L820,260 L640,260",
-        "M1000,150 L900,150 L865,185 L760,185", "M1000,210 L915,210 L880,175 L800,175",
-        "M520,340 L520,300 L490,270 L490,232", "M610,340 L610,304 L642,272 L642,236",
-        "M150,40 L150,8", "M380,260 L380,332",
-    ]
-    vias = [(150, 40), (360, 75), (250, 46), (140, 300), (380, 260), (300, 296),
-            (840, 52), (660, 92), (860, 300), (640, 260), (900, 150), (760, 185),
-            (490, 232), (642, 236), (915, 210)]
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
              f'width="{W}" height="{H}" role="img" '
@@ -246,10 +241,6 @@ def header_svg(top_lang, roles):
 
     # ---- defs ----
     parts.append('<defs>')
-    parts.append('<radialGradient id="bg" cx="50%" cy="38%" r="85%">'
-                 '<stop offset="0%" stop-color="#161a40"/>'
-                 '<stop offset="45%" stop-color="#0b1230"/>'
-                 '<stop offset="100%" stop-color="#05030f"/></radialGradient>')
     # gradiente que fluye por el nombre (repeat + translate = loop sin costuras)
     parts.append('<linearGradient id="ng" gradientUnits="userSpaceOnUse" '
                  'x1="60" y1="0" x2="380" y2="0" spreadMethod="repeat">'
@@ -259,37 +250,20 @@ def header_svg(top_lang, roles):
                  '<stop offset="1" stop-color="#22d3ee"/>'
                  '<animateTransform attributeName="gradientTransform" type="translate" '
                  'values="0 0; 320 0" dur="7s" repeatCount="indefinite"/></linearGradient>')
-    parts.append('<linearGradient id="pins" x1="0" y1="0" x2="1" y2="1">'
-                 '<stop offset="0" stop-color="#22d3ee"/><stop offset="0.5" stop-color="#a855f7"/>'
-                 '<stop offset="1" stop-color="#f472b6"/></linearGradient>')
     parts.append('<filter id="glow" x="-60%" y="-60%" width="220%" height="220%">'
                  '<feGaussianBlur stdDeviation="3" result="b"/>'
                  '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>')
-    parts.append('<filter id="soft"><feGaussianBlur stdDeviation="26"/></filter>')
-    parts.append('<pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">'
-                 '<path d="M34 0H0V34" fill="none" stroke="#1b2350" stroke-width="1"/></pattern>')
-    # velo oscuro a la izquierda: garantiza contraste del texto sobre la aurora
+    # velo oscuro a la izquierda: refuerza el contraste del texto sobre la imagen
     parts.append('<linearGradient id="scrim" x1="0" y1="0" x2="1" y2="0">'
-                 '<stop offset="0" stop-color="#05030f" stop-opacity="0.86"/>'
-                 '<stop offset="0.42" stop-color="#05030f" stop-opacity="0.6"/>'
-                 '<stop offset="0.72" stop-color="#05030f" stop-opacity="0"/></linearGradient>')
+                 '<stop offset="0" stop-color="#05030f" stop-opacity="0.82"/>'
+                 '<stop offset="0.4" stop-color="#05030f" stop-opacity="0.5"/>'
+                 '<stop offset="0.7" stop-color="#05030f" stop-opacity="0"/></linearGradient>')
+    parts.append(f'<clipPath id="rnd"><rect width="{W}" height="{H}" rx="18"/></clipPath>')
     parts.append('</defs>')
 
     parts.append("""<style>
-      .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s ease forwards;}
-      .flow{stroke-dasharray:5 26;animation:flow 1.5s linear infinite;}
-      @keyframes draw{to{stroke-dashoffset:0;}}
-      @keyframes flow{to{stroke-dashoffset:-310;}}
-      .via{animation:pulse 2.6s ease-in-out infinite;transform-origin:center;}
-      @keyframes pulse{0%,100%{opacity:.5;r:3;}50%{opacity:1;r:5.5;}}
       .led{animation:blink 1.5s steps(1) infinite;}
       @keyframes blink{0%,55%{opacity:1;}56%,100%{opacity:.2;}}
-      .pin{animation:sweep 2.4s ease-in-out infinite;}
-      @keyframes sweep{0%,100%{opacity:.3;}50%{opacity:1;}}
-      .aur{animation:drift 9s ease-in-out infinite;}
-      @keyframes drift{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,18px);}}
-      .aur2{animation:drift2 11s ease-in-out infinite;}
-      @keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-46px,-14px);}}
       .fade{opacity:0;animation:fade 1s ease .2s forwards;}
       .fade2{opacity:0;animation:fade 1s ease .7s forwards;}
       @keyframes fade{to{opacity:1;}}
@@ -303,53 +277,18 @@ def header_svg(top_lang, roles):
       .mono{font-family:'Cascadia Code','Consolas',ui-monospace,monospace;}
     </style>""")
 
-    # ---- fondo + aurora + grid ----
-    parts.append(f'<rect width="{W}" height="{H}" rx="18" fill="url(#bg)"/>')
-    parts.append('<g filter="url(#soft)">')
-    parts.append('<circle class="aur" cx="150" cy="70" r="120" fill="#3b1f8f" opacity="0.30"/>')
-    parts.append('<circle class="aur2" cx="820" cy="240" r="150" fill="#0e5a6b" opacity="0.34"/>')
-    parts.append('<circle class="aur" cx="640" cy="40" r="110" fill="#8a1f5c" opacity="0.22"/>')
+    # ---- fondo: imagen IA (con esquinas redondeadas) + velo de legibilidad ----
+    bg = bg_data_uri()
+    parts.append('<g clip-path="url(#rnd)">')
+    if bg:
+        parts.append(f'<image href="{bg}" x="0" y="0" width="{W}" height="{H}" '
+                     f'preserveAspectRatio="xMidYMid slice"/>')
+    else:
+        parts.append(f'<rect width="{W}" height="{H}" fill="#05030f"/>')
+    parts.append(f'<rect width="{W}" height="{H}" fill="url(#scrim)"/>')
     parts.append('</g>')
-    parts.append(f'<rect width="{W}" height="{H}" rx="18" fill="url(#grid)" opacity="0.5"/>')
-    parts.append(f'<rect x="3" y="3" width="{W - 6}" height="{H - 6}" rx="16" fill="none" '
-                 f'stroke="#3a4790" stroke-width="1.5" opacity="0.6"/>')
-
-    # ---- circuito (base que se dibuja + corriente que fluye), color por trazo ----
-    for i, d in enumerate(traces):
-        c = NEON[i % len(NEON)]
-        parts.append(f'<path d="{d}" fill="none" stroke="{c}" stroke-width="2.4" opacity="0.5" '
-                     f'stroke-linecap="round" stroke-linejoin="round" class="draw" '
-                     f'style="animation-delay:{i * 0.08:.2f}s"/>')
-        parts.append(f'<path d="{d}" fill="none" stroke="{c}" stroke-width="2.4" '
-                     f'stroke-linecap="round" filter="url(#glow)" class="flow" '
-                     f'style="animation-delay:{i * 0.12:.2f}s"/>')
-    for i, (x, y) in enumerate(vias):
-        c = NEON[i % len(NEON)]
-        parts.append(f'<circle cx="{x}" cy="{y}" r="3" fill="{c}" class="via" '
-                     f'filter="url(#glow)" style="animation-delay:{i * 0.13:.2f}s"/>')
-
-    # ---- chip / IC ----
-    cx, cy, cw, ch = 770, 86, 150, 96
-    parts.append('<g class="fade2">')
-    parts.append(f'<rect x="{cx}" y="{cy}" width="{cw}" height="{ch}" rx="10" fill="#0c1338" '
-                 f'stroke="url(#pins)" stroke-width="2"/>')
-    for i in range(6):
-        py = cy + 14 + i * 13
-        c1, c2 = NEON[i % len(NEON)], NEON[(i + 3) % len(NEON)]
-        parts.append(f'<rect x="{cx - 10}" y="{py}" width="10" height="6" rx="2" fill="{c1}" '
-                     f'class="pin" filter="url(#glow)" style="animation-delay:{i * 0.16:.2f}s"/>')
-        parts.append(f'<rect x="{cx + cw}" y="{py}" width="10" height="6" rx="2" fill="{c2}" '
-                     f'class="pin" filter="url(#glow)" style="animation-delay:{i * 0.16 + 0.3:.2f}s"/>')
-    parts.append(f'<circle cx="{cx + 18}" cy="{cy + 18}" r="5" fill="none" stroke="#22d3ee" '
-                 f'stroke-width="1.5"/>')
-    parts.append(f'<text x="{cx + 36}" y="{cy + 24}" fill="{silk}" class="mono" font-size="13" '
-                 f'letter-spacing="1">JNSZ-01</text>')
-    parts.append(f'<text x="{cx + 18}" y="{cy + 66}" fill="#22d3ee" class="mono" font-size="10" '
-                 f'opacity="0.8">core: {esc(top_lang)}</text>')
-    parts.append('</g>')
-
-    # ---- velo para legibilidad del texto ----
-    parts.append(f'<rect x="0" y="0" width="{W}" height="{H}" rx="18" fill="url(#scrim)"/>')
+    parts.append(f'<rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="17" fill="none" '
+                 f'stroke="#3a4790" stroke-width="1.5" opacity="0.7"/>')
 
     # ---- pill de estado (ancho holgado + texto centrado: nunca se sale) ----
     pill_txt = "available . open to work"
