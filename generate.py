@@ -268,7 +268,7 @@ def header_svg(top_lang, roles):
       .fade2{opacity:0;animation:fade 1s ease .7s forwards;}
       @keyframes fade{to{opacity:1;}}
       .name{opacity:0;animation:fade 1s ease .2s forwards, shine 3s ease-in-out 1.4s infinite;}
-      @keyframes shine{0%,100%{filter:drop-shadow(0 0 6px rgba(96,165,250,.5));}50%{filter:drop-shadow(0 0 16px rgba(244,114,182,.7));}}
+      @keyframes shine{0%,100%{filter:drop-shadow(0 0 4px rgba(34,211,238,.4));}50%{filter:drop-shadow(0 0 11px rgba(34,211,238,.55));}}
       .role{opacity:0;animation:role 9s ease-in-out infinite;}
       @keyframes role{0%{opacity:0;transform:translateY(6px);}3%{opacity:1;transform:translateY(0);}28%{opacity:1;}33%,100%{opacity:0;}}
       .cur{animation:cur 1s steps(1) infinite;}
@@ -308,9 +308,9 @@ def header_svg(top_lang, roles):
 
     # ---- nombre con gradiente animado ----
     parts.append(f'<text x="58" y="156" font-size="38" font-weight="800" letter-spacing="0.5" '
-                 f'fill="url(#ng)" stroke="#000000" stroke-width="4" paint-order="stroke" '
+                 f'fill="#f4f8ff" stroke="#000000" stroke-width="4" paint-order="stroke" '
                  f'stroke-linejoin="round" class="name">{esc(FULL_NAME)}</text>')
-    parts.append(f'<text x="60" y="198" fill="#f0abfc" class="mono fade2" font-size="20" '
+    parts.append(f'<text x="60" y="198" fill="#7dd3fc" class="mono fade2" font-size="20" '
                  f'font-weight="700" letter-spacing="4" stroke="#000000" stroke-width="3" '
                  f'paint-order="stroke" stroke-linejoin="round">{esc(ALIAS)}</text>')
 
