@@ -46,7 +46,8 @@ DEFAULT_COLOR = "#6b7280"
 #  Capa de datos                                                              #
 # --------------------------------------------------------------------------- #
 def token():
-    return os.environ.get("METRICS_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+    tk = os.environ.get("METRICS_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+    return tk.strip().lstrip("﻿")  # tolera BOM/espacios de un secret mal codificado
 
 
 def api_get(path):
