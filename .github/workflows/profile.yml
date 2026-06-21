@@ -41,7 +41,13 @@ jobs:
           git add assets README.md
           if git diff --staged --quiet; then
             echo "No changes."
-          else
-            git commit -m "chore: refresh profile [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "chore: refresh profile [skip ci]"
+          # Reintenta ante carreras: si el remoto avanzo, rebasa los assets generados y reintenta.
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase --autostash -X ours origin main || true
+          done
+          echo "push failed after retries" >&2
+          exit 1
