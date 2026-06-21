@@ -725,14 +725,6 @@ def build_readme(lang, projects_table, updated):
 
 <br/>
 
-## {S['h_trophies']}
-
-<div align="center">
-
-{trophies()}
-
-</div>
-
 ## {S['h_snake']}
 
 <div align="center">

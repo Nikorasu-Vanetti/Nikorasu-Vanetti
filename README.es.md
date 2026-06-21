@@ -82,14 +82,6 @@
 
 <br/>
 
-## Trofeos
-
-<div align="center">
-
-<img src="https://github-profile-trophy.vercel.app/?username=Nikorasu-Vanetti&theme=algolia&no-frame=true&no-bg=true&column=7&margin-w=6&margin-h=6" alt="trophies"/>
-
-</div>
-
 ## Gráfico de contribuciones
 
 <div align="center">
@@ -126,6 +118,6 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <div align="center">
 
-_Última actualización: 2026-06-21 03:53 UTC_
+_Última actualización: 2026-06-21 03:56 UTC_
 
 </div>
