@@ -119,6 +119,6 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <div align="center">
 
-_Last refreshed: 2026-06-21 07:58 UTC_
+_Última actualización: 2026-06-21 12:54 UTC_
 
 </div>
