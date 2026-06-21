@@ -30,7 +30,7 @@ FULL_NAME = "Jose Nicolas Sanchez Zorrilla"
 ALIAS = "NIKO . VANETTI"
 
 # Textos por idioma. La identidad (nombre/alias) no se traduce; todo lo demas si.
-LANGS = ["en", "es"]
+LANGS = ["es", "en"]  # primero el default (es = README.md)
 STRINGS = {
     "en": {
         "role": "Software Engineer  //  Developer tools, AI agents & embedded systems",
@@ -110,7 +110,7 @@ STRINGS = {
         "btn": "Español",
     },
 }
-FILES = {"en": "README.md", "es": "README.es.md"}
+FILES = {"es": "README.md", "en": "README.en.md"}  # español por defecto
 
 # Colores oficiales de GitHub Linguist (los que falten caen a un gris).
 LINGUIST = {
@@ -268,6 +268,11 @@ def header_svg(top_lang, roles):
     parts.append('<filter id="soft"><feGaussianBlur stdDeviation="26"/></filter>')
     parts.append('<pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">'
                  '<path d="M34 0H0V34" fill="none" stroke="#1b2350" stroke-width="1"/></pattern>')
+    # velo oscuro a la izquierda: garantiza contraste del texto sobre la aurora
+    parts.append('<linearGradient id="scrim" x1="0" y1="0" x2="1" y2="0">'
+                 '<stop offset="0" stop-color="#05030f" stop-opacity="0.86"/>'
+                 '<stop offset="0.42" stop-color="#05030f" stop-opacity="0.6"/>'
+                 '<stop offset="0.72" stop-color="#05030f" stop-opacity="0"/></linearGradient>')
     parts.append('</defs>')
 
     parts.append("""<style>
@@ -301,9 +306,9 @@ def header_svg(top_lang, roles):
     # ---- fondo + aurora + grid ----
     parts.append(f'<rect width="{W}" height="{H}" rx="18" fill="url(#bg)"/>')
     parts.append('<g filter="url(#soft)">')
-    parts.append('<circle class="aur" cx="220" cy="120" r="150" fill="#3b1f8f" opacity="0.55"/>')
-    parts.append('<circle class="aur2" cx="760" cy="220" r="170" fill="#0e5a6b" opacity="0.5"/>')
-    parts.append('<circle class="aur" cx="540" cy="60" r="120" fill="#8a1f5c" opacity="0.35"/>')
+    parts.append('<circle class="aur" cx="150" cy="70" r="120" fill="#3b1f8f" opacity="0.30"/>')
+    parts.append('<circle class="aur2" cx="820" cy="240" r="150" fill="#0e5a6b" opacity="0.34"/>')
+    parts.append('<circle class="aur" cx="640" cy="40" r="110" fill="#8a1f5c" opacity="0.22"/>')
     parts.append('</g>')
     parts.append(f'<rect width="{W}" height="{H}" rx="18" fill="url(#grid)" opacity="0.5"/>')
     parts.append(f'<rect x="3" y="3" width="{W - 6}" height="{H - 6}" rx="16" fill="none" '
@@ -343,13 +348,18 @@ def header_svg(top_lang, roles):
                  f'opacity="0.8">core: {esc(top_lang)}</text>')
     parts.append('</g>')
 
-    # ---- pill de estado ----
+    # ---- velo para legibilidad del texto ----
+    parts.append(f'<rect x="0" y="0" width="{W}" height="{H}" rx="18" fill="url(#scrim)"/>')
+
+    # ---- pill de estado (ancho calculado para que el texto no se salga) ----
+    pill_txt = "available . open to work"
+    pill_w = 44 + int(len(pill_txt) * 7.3)
     parts.append('<g class="fade">')
-    parts.append('<rect x="56" y="40" width="186" height="30" rx="15" fill="#0d1640" '
-                 'stroke="#2dd4bf" stroke-width="1.2"/>')
+    parts.append(f'<rect x="56" y="40" width="{pill_w}" height="30" rx="15" fill="#0d1640" '
+                 f'stroke="#2dd4bf" stroke-width="1.2"/>')
     parts.append('<circle cx="76" cy="55" r="5" fill="#34d399" class="led" filter="url(#glow)"/>')
     parts.append(f'<text x="92" y="59" fill="{silk}" class="mono" font-size="12" '
-                 f'letter-spacing="1">available . open to work</text>')
+                 f'letter-spacing="0.5">{esc(pill_txt)}</text>')
     parts.append('</g>')
 
     # ---- nombre con gradiente animado ----
@@ -372,11 +382,11 @@ def header_svg(top_lang, roles):
     xx = 60
     parts.append('<g class="fade2">')
     for label, c in chips:
-        bw = 16 + len(label) * 8
+        bw = 38 + int(len(label) * 7.3)  # cabe dot + texto mono 12 + padding
         parts.append(f'<rect x="{xx}" y="276" width="{bw}" height="26" rx="13" fill="#0d1640" '
                      f'stroke="{c}" stroke-width="1.3"/>')
-        parts.append(f'<circle cx="{xx + 13}" cy="289" r="4" fill="{c}"/>')
-        parts.append(f'<text x="{xx + 24}" y="293" fill="{silk}" class="mono" font-size="12">'
+        parts.append(f'<circle cx="{xx + 14}" cy="289" r="4" fill="{c}"/>')
+        parts.append(f'<text x="{xx + 26}" y="293" fill="{silk}" class="mono" font-size="12">'
                      f'{esc(label)}</text>')
         xx += bw + 12
     parts.append('</g>')
@@ -569,6 +579,7 @@ def lang_switch(cur):
 # --------------------------------------------------------------------------- #
 _BG = "0b1230"
 EMAIL = "josenicole2000@gmail.com"
+LINKEDIN = "https://www.linkedin.com/in/jos%C3%A9-nicolas-s%C3%A1nchez-zorrilla-76990b280/"
 
 
 def _enc(s):
@@ -659,11 +670,16 @@ def snake_img():
 
 
 def connect_section():
-    return (
-        f'<a href="mailto:{EMAIL}"><img src="https://img.shields.io/badge/Email-{_BG}?'
-        f'style=for-the-badge&logo=gmail&logoColor=f472b6" alt="Email"/></a>\n'
-        f'<a href="https://github.com/{USERNAME}"><img src="https://img.shields.io/badge/'
-        f'GitHub-{_BG}?style=for-the-badge&logo=github&logoColor=22d3ee" alt="GitHub"/></a>')
+    out = []
+    if LINKEDIN:
+        out.append(f'<a href="{LINKEDIN}"><img src="https://img.shields.io/badge/'
+                   f'LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" '
+                   f'alt="LinkedIn"/></a>')
+    out.append(f'<a href="mailto:{EMAIL}"><img src="https://img.shields.io/badge/Email-{_BG}?'
+               f'style=for-the-badge&logo=gmail&logoColor=f472b6" alt="Email"/></a>')
+    out.append(f'<a href="https://github.com/{USERNAME}"><img src="https://img.shields.io/badge/'
+               f'GitHub-{_BG}?style=for-the-badge&logo=github&logoColor=22d3ee" alt="GitHub"/></a>')
+    return "\n".join(out)
 
 
 def build_readme(lang, projects_table, updated):

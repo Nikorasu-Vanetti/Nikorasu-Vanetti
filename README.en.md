@@ -1,12 +1,12 @@
 <div align="center">
 
-<a href="README.md"><img src="./assets/btn-en-off.svg" height="38" alt="English"/></a> &nbsp; <a href="README.es.md"><img src="./assets/btn-es-on.svg" height="38" alt="Español"/></a>
+<a href="README.md"><img src="./assets/btn-es-off.svg" height="38" alt="Español"/></a> &nbsp; <a href="README.en.md"><img src="./assets/btn-en-on.svg" height="38" alt="English"/></a>
 
 </div>
 
 <div align="center">
 
-<img src="./assets/header-es.svg" width="100%" alt="Jose Nicolas Sanchez Zorrilla" />
+<img src="./assets/header-en.svg" width="100%" alt="Jose Nicolas Sanchez Zorrilla" />
 
 <img src="https://komarev.com/ghpvc/?username=Nikorasu-Vanetti&color=22d3ee&style=for-the-badge&label=PROFILE+VIEWS" alt="views"/>
 <img src="https://img.shields.io/github/followers/Nikorasu-Vanetti?style=for-the-badge&logo=github&color=a855f7&labelColor=0b1230" alt="followers"/>
@@ -16,7 +16,7 @@
 
 <br/>
 
-## Estadísticas y racha
+## GitHub stats & streak
 
 <div align="center">
 
@@ -26,7 +26,7 @@
 
 </div>
 
-## Actividad de contribuciones
+## Contribution activity
 
 <div align="center">
 
@@ -38,51 +38,51 @@
 
 <div align="center">
 
-<img src="./assets/stats-es.svg" width="100%" alt="metrics" />
+<img src="./assets/stats-en.svg" width="100%" alt="metrics" />
 
 </div>
 
 <br/>
 
-<img src="./assets/languages-es.svg" width="100%" alt="DISTRIBUCIÓN DE LENGUAJES" />
+<img src="./assets/languages-en.svg" width="100%" alt="LANGUAGE DISTRIBUTION" />
 
 <br/>
 
-## Tecnologías
+## Tech stack
 
 <div align="center">
 
-**Lenguajes**  
+**Languages**  
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" height="28"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" height="28"/> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" height="28"/> <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=black" alt="C" height="28"/> <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" alt="C++" height="28"/> <img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white" alt="Swift" height="28"/> <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" height="28"/> <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" height="28"/> <img src="https://img.shields.io/badge/Verilog-848BF3?style=for-the-badge" alt="Verilog" height="28"/>
 
-**Web y UI**  
+**Web &amp; UI**  
 <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" height="28"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" height="28"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" height="28"/> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" height="28"/> <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" height="28"/>
 
-**Herramientas y DevOps**  
+**Tooling &amp; DevOps**  
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" height="28"/> <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" height="28"/> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" height="28"/> <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" height="28"/> <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="VS Code" height="28"/>
 
-**IA y datos**  
+**AI &amp; data**  
 <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI" height="28"/> <img src="https://img.shields.io/badge/Anthropic-191919?style=for-the-badge&logo=anthropic&logoColor=white" alt="Anthropic" height="28"/> <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" height="28"/> <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" height="28"/>
 
 </div>
 
 <br/>
 
-## Trabajo seleccionado
+## Selected work
 
-| Proyecto | Stack | Qué es | Estado |
+| Project | Stack | What it is | Status |
 | --- | --- | --- | --- |
-| **niko-ide-verilog** | `TypeScript` | - | privado |
-| **niko-agents** | `Python` | - | privado |
-| **Jose_Sanchez_PM_2025_C2** | `C` | Repositorio con las tareas de Programación para Mecatrónicos del C2 del ITLA. | privado |
-| **[game-guard](https://github.com/Nikorasu-Vanetti/game-guard)** | `Python` | Bloqueo de videojuegos por horario en Windows | público |
-| **moneyboxrd-ios** | `Swift` | - | privado |
-| **moneyboxrd-android** | `Java` | - | privado |
-| **[Windows-Startup-Manager](https://github.com/Nikorasu-Vanetti/Windows-Startup-Manager)** | `Python` | Aplicación en Python con interfaz gráfica para optimizar Windows. Permite gestionar programas de inicio y deshabilitar servicios en segundo plano no esenciales de forma totalmente segura. Esta abierta a modificaciones! | público |
+| **niko-ide-verilog** | `TypeScript` | - | private |
+| **niko-agents** | `Python` | - | private |
+| **Jose_Sanchez_PM_2025_C2** | `C` | Repositorio con las tareas de Programación para Mecatrónicos del C2 del ITLA. | private |
+| **[game-guard](https://github.com/Nikorasu-Vanetti/game-guard)** | `Python` | Bloqueo de videojuegos por horario en Windows | public |
+| **moneyboxrd-ios** | `Swift` | - | private |
+| **moneyboxrd-android** | `Java` | - | private |
+| **[Windows-Startup-Manager](https://github.com/Nikorasu-Vanetti/Windows-Startup-Manager)** | `Python` | Aplicación en Python con interfaz gráfica para optimizar Windows. Permite gestionar programas de inicio y deshabilitar servicios en segundo plano no esenciales de forma totalmente segura. Esta abierta a modificaciones! | public |
 
 <br/>
 
-## Gráfico de contribuciones
+## Contribution graph
 
 <div align="center">
 
@@ -92,23 +92,24 @@
 
 <br/>
 
-## Acerca de
+## About
 
-Construyo herramientas para desarrolladores, agentes de IA y sistemas embebidos/mecatrónicos. Dedico la mayor parte del tiempo a diseñar IDEs y automatizaciones que vuelven simple lo difícil, trabajando en todo el stack desde el navegador hasta el silicio.
+I build developer tooling, AI agents and embedded/mechatronics systems. Most of my time goes to designing IDEs and automation that make hard things feel simple, working across the stack from the browser down to the silicon.
 
-- Web y tooling: TypeScript, JavaScript, editores/IDE a medida
-- Sistemas y embebidos: C, C++, Verilog (FPGAs Tang Primer), mecatrónica en el ITLA
-- IA y automatización: agentes en Python, orquestación de flujos
-- Móvil: Swift, Kotlin / Java
+- Web & tooling: TypeScript, JavaScript, custom IDE/editor surfaces
+- Systems & embedded: C, C++, Verilog (Tang Primer FPGAs), mechatronics at ITLA
+- AI & automation: Python agents, workflow orchestration
+- Mobile: Swift, Kotlin / Java
 
-Todo este perfil está generado por código. La cabecera, las métricas, el gráfico de lenguajes y la lista de proyectos se renderizan con datos reales de los repos mediante [`generate.py`](./generate.py) y se refrescan solos con una GitHub Action. Nada aquí se edita a mano.
+Everything on this profile is generated by code. The header, the metrics, the language chart and the project list are rendered from live repository data by [`generate.py`](./generate.py) and refreshed automatically by a GitHub Action. Nothing here is updated by hand.
 
 <br/>
 
-## Contacto
+## Connect
 
 <div align="center">
 
+<a href="https://www.linkedin.com/in/jos%C3%A9-nicolas-s%C3%A1nchez-zorrilla-76990b280/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
 <a href="mailto:josenicole2000@gmail.com"><img src="https://img.shields.io/badge/Email-0b1230?style=for-the-badge&logo=gmail&logoColor=f472b6" alt="Email"/></a>
 <a href="https://github.com/Nikorasu-Vanetti"><img src="https://img.shields.io/badge/GitHub-0b1230?style=for-the-badge&logo=github&logoColor=22d3ee" alt="GitHub"/></a>
 
@@ -118,6 +119,6 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <div align="center">
 
-_Última actualización: 2026-06-21 03:56 UTC_
+_Last refreshed: 2026-06-21 12:52 UTC_
 
 </div>
