@@ -34,6 +34,17 @@ LANGS = ["en", "es"]
 STRINGS = {
     "en": {
         "role": "Software Engineer  //  Developer tools, AI agents & embedded systems",
+        "roles": [
+            "Software Engineer  //  developer tools & IDEs",
+            "AI agents & automation  //  Python, orchestration",
+            "Embedded & mechatronics  //  C, C++, Verilog, FPGAs",
+        ],
+        "h_connect": "Connect",
+        "h_stats": "GitHub stats & streak",
+        "h_activity": "Contribution activity",
+        "h_tech": "Tech stack",
+        "h_trophies": "Trophies",
+        "h_snake": "Contribution graph",
         "lang_title": "LANGUAGE DISTRIBUTION",
         "lang_note": "// computed from all owned repos",
         "stats": ["Repositories", "Total stars", "Languages", "Since"],
@@ -61,6 +72,17 @@ STRINGS = {
     },
     "es": {
         "role": "Ingeniero de Software  //  Herramientas para devs, agentes IA y sistemas embebidos",
+        "roles": [
+            "Ingeniero de Software  //  herramientas para devs e IDEs",
+            "Agentes IA y automatización  //  Python, orquestación",
+            "Embebidos y mecatrónica  //  C, C++, Verilog, FPGAs",
+        ],
+        "h_connect": "Contacto",
+        "h_stats": "Estadísticas y racha",
+        "h_activity": "Actividad de contribuciones",
+        "h_tech": "Tecnologías",
+        "h_trophies": "Trofeos",
+        "h_snake": "Gráfico de contribuciones",
         "lang_title": "DISTRIBUCIÓN DE LENGUAJES",
         "lang_note": "// calculado desde todos mis repos",
         "stats": ["Repositorios", "Estrellas", "Lenguajes", "Desde"],
@@ -196,131 +218,167 @@ def write(path, content):
 # --------------------------------------------------------------------------- #
 #  SVG: cabecera PCB animada                                                   #
 # --------------------------------------------------------------------------- #
-def header_svg(top_lang, role):
-    W, H = 1000, 320
-    accent = "#2dd4bf"   # teal traza
-    accent2 = "#38bdf8"  # sky traza
-    gold = "#fbbf24"     # cobre / vias
-    silk = "#e2f1f8"     # serigrafia
+def header_svg(top_lang, roles):
+    """Cabecera neon multicolor: circuito animado + nombre con gradiente que fluye
+    + roles rotativos. `roles` es una lista de frases que se alternan."""
+    W, H = 1000, 340
+    silk = "#eaf2ff"
+    # Paleta neon repartida por los trazos del circuito.
+    NEON = ["#22d3ee", "#a855f7", "#f472b6", "#34d399",
+            "#fbbf24", "#60a5fa", "#fb7185", "#a3e635"]
 
-    # Trazos PCB (ruteo a 45 grados). Cada uno se "dibuja" y lleva corriente.
+    # Trazos PCB que enmarcan el texto (arriba, abajo y zona del chip a la derecha).
     traces = [
-        "M40,60 L160,60 L210,110 L210,210 L150,270",
-        "M40,150 L120,150 L150,180 L300,180",
-        "M40,250 L100,250 L140,210 L260,210",
-        "M960,70 L840,70 L800,110 L800,250 L860,300",
-        "M960,160 L880,160 L850,190 L700,190",
-        "M960,260 L900,260 L860,220 L740,220",
-        "M500,300 L500,250 L470,220 L470,170",
-        "M620,300 L620,260 L650,230 L650,180",
+        "M0,40 L150,40 L185,75 L360,75", "M0,86 L110,86 L150,46 L250,46",
+        "M0,300 L140,300 L180,260 L380,260", "M0,256 L90,256 L130,296 L300,296",
+        "M1000,52 L840,52 L800,92 L660,92", "M1000,300 L860,300 L820,260 L640,260",
+        "M1000,150 L900,150 L865,185 L760,185", "M1000,210 L915,210 L880,175 L800,175",
+        "M520,340 L520,300 L490,270 L490,232", "M610,340 L610,304 L642,272 L642,236",
+        "M150,40 L150,8", "M380,260 L380,332",
     ]
-    # Vias / pads que pulsan.
-    vias = [
-        (160, 60), (210, 210), (300, 180), (260, 210),
-        (840, 70), (700, 190), (740, 220), (470, 170), (650, 180),
-        (120, 150), (880, 160), (900, 260),
-    ]
+    vias = [(150, 40), (360, 75), (250, 46), (140, 300), (380, 260), (300, 296),
+            (840, 52), (660, 92), (860, 300), (640, 260), (900, 150), (760, 185),
+            (490, 232), (642, 236), (915, 210)]
 
-    parts = []
-    parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
-                 f'width="{W}" height="{H}" role="img" '
-                 f'aria-label="{esc(FULL_NAME)} - {esc(role)}">')
+    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+             f'width="{W}" height="{H}" role="img" '
+             f'aria-label="{esc(FULL_NAME)} - {esc(roles[0]) if roles else ""}">']
 
     # ---- defs ----
     parts.append('<defs>')
-    parts.append('<radialGradient id="bg" cx="50%" cy="40%" r="80%">'
-                 '<stop offset="0%" stop-color="#0a1f33"/>'
-                 '<stop offset="60%" stop-color="#071524"/>'
-                 '<stop offset="100%" stop-color="#040d18"/></radialGradient>')
-    parts.append(f'<linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">'
-                 f'<stop offset="0%" stop-color="{accent}"/>'
-                 f'<stop offset="100%" stop-color="{accent2}"/></linearGradient>')
-    parts.append('<filter id="glow" x="-50%" y="-50%" width="200%" height="200%">'
-                 '<feGaussianBlur stdDeviation="2.2" result="b"/>'
+    parts.append('<radialGradient id="bg" cx="50%" cy="38%" r="85%">'
+                 '<stop offset="0%" stop-color="#161a40"/>'
+                 '<stop offset="45%" stop-color="#0b1230"/>'
+                 '<stop offset="100%" stop-color="#05030f"/></radialGradient>')
+    # gradiente que fluye por el nombre (repeat + translate = loop sin costuras)
+    parts.append('<linearGradient id="ng" gradientUnits="userSpaceOnUse" '
+                 'x1="60" y1="0" x2="380" y2="0" spreadMethod="repeat">'
+                 '<stop offset="0" stop-color="#22d3ee"/><stop offset="0.17" stop-color="#60a5fa"/>'
+                 '<stop offset="0.34" stop-color="#a855f7"/><stop offset="0.5" stop-color="#f472b6"/>'
+                 '<stop offset="0.67" stop-color="#fb7185"/><stop offset="0.84" stop-color="#fbbf24"/>'
+                 '<stop offset="1" stop-color="#22d3ee"/>'
+                 '<animateTransform attributeName="gradientTransform" type="translate" '
+                 'values="0 0; 320 0" dur="7s" repeatCount="indefinite"/></linearGradient>')
+    parts.append('<linearGradient id="pins" x1="0" y1="0" x2="1" y2="1">'
+                 '<stop offset="0" stop-color="#22d3ee"/><stop offset="0.5" stop-color="#a855f7"/>'
+                 '<stop offset="1" stop-color="#f472b6"/></linearGradient>')
+    parts.append('<filter id="glow" x="-60%" y="-60%" width="220%" height="220%">'
+                 '<feGaussianBlur stdDeviation="3" result="b"/>'
                  '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>')
-    parts.append('<pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">'
-                 '<path d="M28 0H0V28" fill="none" stroke="#0e2a45" stroke-width="1"/></pattern>')
+    parts.append('<filter id="soft"><feGaussianBlur stdDeviation="26"/></filter>')
+    parts.append('<pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">'
+                 '<path d="M34 0H0V34" fill="none" stroke="#1b2350" stroke-width="1"/></pattern>')
     parts.append('</defs>')
 
-    # ---- styles (CSS animations, sin JS, funcionan via <img>) ----
-    css = """
-    <style>
-      .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease forwards;}
-      .flow{stroke-dasharray:6 22;stroke-dashoffset:0;animation:flow 1.4s linear infinite;}
+    parts.append("""<style>
+      .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s ease forwards;}
+      .flow{stroke-dasharray:5 26;animation:flow 1.5s linear infinite;}
       @keyframes draw{to{stroke-dashoffset:0;}}
-      @keyframes flow{to{stroke-dashoffset:-280;}}
-      .via{animation:pulse 2.8s ease-in-out infinite;transform-origin:center;}
-      @keyframes pulse{0%,100%{opacity:.45;r:3;}50%{opacity:1;r:5;}}
-      .led{animation:blink 1.6s steps(1) infinite;}
-      @keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:.15;}}
-      .pin{animation:sweep 3.2s ease-in-out infinite;}
-      @keyframes sweep{0%,100%{opacity:.25;}50%{opacity:1;}}
-      .fade{opacity:0;animation:fade 1s ease forwards;}
-      .fade2{opacity:0;animation:fade 1s ease .5s forwards;}
-      .fade3{opacity:0;animation:fade 1s ease 1s forwards;}
+      @keyframes flow{to{stroke-dashoffset:-310;}}
+      .via{animation:pulse 2.6s ease-in-out infinite;transform-origin:center;}
+      @keyframes pulse{0%,100%{opacity:.5;r:3;}50%{opacity:1;r:5.5;}}
+      .led{animation:blink 1.5s steps(1) infinite;}
+      @keyframes blink{0%,55%{opacity:1;}56%,100%{opacity:.2;}}
+      .pin{animation:sweep 2.4s ease-in-out infinite;}
+      @keyframes sweep{0%,100%{opacity:.3;}50%{opacity:1;}}
+      .aur{animation:drift 9s ease-in-out infinite;}
+      @keyframes drift{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,18px);}}
+      .aur2{animation:drift2 11s ease-in-out infinite;}
+      @keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-46px,-14px);}}
+      .fade{opacity:0;animation:fade 1s ease .2s forwards;}
+      .fade2{opacity:0;animation:fade 1s ease .7s forwards;}
       @keyframes fade{to{opacity:1;}}
-      .cur{animation:cur 1.1s steps(1) infinite;}
+      .name{opacity:0;animation:fade 1s ease .2s forwards, shine 3s ease-in-out 1.4s infinite;}
+      @keyframes shine{0%,100%{filter:drop-shadow(0 0 6px rgba(96,165,250,.5));}50%{filter:drop-shadow(0 0 16px rgba(244,114,182,.7));}}
+      .role{opacity:0;animation:role 9s ease-in-out infinite;}
+      @keyframes role{0%{opacity:0;transform:translateY(6px);}3%{opacity:1;transform:translateY(0);}28%{opacity:1;}33%,100%{opacity:0;}}
+      .cur{animation:cur 1s steps(1) infinite;}
       @keyframes cur{0%,49%{opacity:1;}50%,100%{opacity:0;}}
       text{font-family:'Segoe UI',Helvetica,Arial,sans-serif;}
       .mono{font-family:'Cascadia Code','Consolas',ui-monospace,monospace;}
-    </style>
-    """
-    parts.append(css)
+    </style>""")
 
-    # ---- background ----
-    parts.append(f'<rect width="{W}" height="{H}" rx="16" fill="url(#bg)"/>')
-    parts.append(f'<rect width="{W}" height="{H}" rx="16" fill="url(#grid)" opacity="0.6"/>')
-    parts.append(f'<rect x="3" y="3" width="{W - 6}" height="{H - 6}" rx="14" fill="none" '
-                 f'stroke="{accent}" stroke-width="1.5" opacity="0.5"/>')
+    # ---- fondo + aurora + grid ----
+    parts.append(f'<rect width="{W}" height="{H}" rx="18" fill="url(#bg)"/>')
+    parts.append('<g filter="url(#soft)">')
+    parts.append('<circle class="aur" cx="220" cy="120" r="150" fill="#3b1f8f" opacity="0.55"/>')
+    parts.append('<circle class="aur2" cx="760" cy="220" r="170" fill="#0e5a6b" opacity="0.5"/>')
+    parts.append('<circle class="aur" cx="540" cy="60" r="120" fill="#8a1f5c" opacity="0.35"/>')
+    parts.append('</g>')
+    parts.append(f'<rect width="{W}" height="{H}" rx="18" fill="url(#grid)" opacity="0.5"/>')
+    parts.append(f'<rect x="3" y="3" width="{W - 6}" height="{H - 6}" rx="16" fill="none" '
+                 f'stroke="#3a4790" stroke-width="1.5" opacity="0.6"/>')
 
-    # ---- traces (capa base dibujandose + capa de corriente) ----
-    for d in traces:
-        parts.append(f'<path d="{d}" fill="none" stroke="url(#trace)" stroke-width="2.4" '
-                     f'stroke-linecap="round" stroke-linejoin="round" opacity="0.55" class="draw"/>')
-    for d in traces:
-        parts.append(f'<path d="{d}" fill="none" stroke="#bdf6ff" stroke-width="2.4" '
-                     f'stroke-linecap="round" filter="url(#glow)" class="flow"/>')
+    # ---- circuito (base que se dibuja + corriente que fluye), color por trazo ----
+    for i, d in enumerate(traces):
+        c = NEON[i % len(NEON)]
+        parts.append(f'<path d="{d}" fill="none" stroke="{c}" stroke-width="2.4" opacity="0.5" '
+                     f'stroke-linecap="round" stroke-linejoin="round" class="draw" '
+                     f'style="animation-delay:{i * 0.08:.2f}s"/>')
+        parts.append(f'<path d="{d}" fill="none" stroke="{c}" stroke-width="2.4" '
+                     f'stroke-linecap="round" filter="url(#glow)" class="flow" '
+                     f'style="animation-delay:{i * 0.12:.2f}s"/>')
+    for i, (x, y) in enumerate(vias):
+        c = NEON[i % len(NEON)]
+        parts.append(f'<circle cx="{x}" cy="{y}" r="3" fill="{c}" class="via" '
+                     f'filter="url(#glow)" style="animation-delay:{i * 0.13:.2f}s"/>')
 
-    # ---- vias ----
-    for (x, y) in vias:
-        parts.append(f'<circle cx="{x}" cy="{y}" r="3" fill="{gold}" class="via" filter="url(#glow)"/>')
-
-    # ---- chip / IC a la derecha ----
-    cx, cy, cw, ch = 740, 70, 150, 96
+    # ---- chip / IC ----
+    cx, cy, cw, ch = 770, 86, 150, 96
     parts.append('<g class="fade2">')
-    parts.append(f'<rect x="{cx}" y="{cy}" width="{cw}" height="{ch}" rx="8" fill="#0c2236" '
-                 f'stroke="{accent}" stroke-width="1.5"/>')
-    # pines laterales
+    parts.append(f'<rect x="{cx}" y="{cy}" width="{cw}" height="{ch}" rx="10" fill="#0c1338" '
+                 f'stroke="url(#pins)" stroke-width="2"/>')
     for i in range(6):
         py = cy + 14 + i * 13
-        parts.append(f'<rect x="{cx - 10}" y="{py}" width="10" height="6" fill="{gold}" '
-                     f'class="pin" style="animation-delay:{i * 0.18:.2f}s"/>')
-        parts.append(f'<rect x="{cx + cw}" y="{py}" width="10" height="6" fill="{gold}" '
-                     f'class="pin" style="animation-delay:{i * 0.18 + 0.4:.2f}s"/>')
-    parts.append(f'<circle cx="{cx + 16}" cy="{cy + 16}" r="5" fill="none" '
-                 f'stroke="{accent2}" stroke-width="1.5"/>')
-    parts.append(f'<text x="{cx + 34}" y="{cy + 22}" fill="{silk}" class="mono" font-size="13" '
+        c1, c2 = NEON[i % len(NEON)], NEON[(i + 3) % len(NEON)]
+        parts.append(f'<rect x="{cx - 10}" y="{py}" width="10" height="6" rx="2" fill="{c1}" '
+                     f'class="pin" filter="url(#glow)" style="animation-delay:{i * 0.16:.2f}s"/>')
+        parts.append(f'<rect x="{cx + cw}" y="{py}" width="10" height="6" rx="2" fill="{c2}" '
+                     f'class="pin" filter="url(#glow)" style="animation-delay:{i * 0.16 + 0.3:.2f}s"/>')
+    parts.append(f'<circle cx="{cx + 18}" cy="{cy + 18}" r="5" fill="none" stroke="#22d3ee" '
+                 f'stroke-width="1.5"/>')
+    parts.append(f'<text x="{cx + 36}" y="{cy + 24}" fill="{silk}" class="mono" font-size="13" '
                  f'letter-spacing="1">JNSZ-01</text>')
-    parts.append(f'<text x="{cx + 18}" y="{cy + 64}" fill="{accent}" class="mono" font-size="10" '
-                 f'opacity="0.7">core: {esc(top_lang)}</text>')
+    parts.append(f'<text x="{cx + 18}" y="{cy + 66}" fill="#22d3ee" class="mono" font-size="10" '
+                 f'opacity="0.8">core: {esc(top_lang)}</text>')
     parts.append('</g>')
 
-    # ---- LED de estado ----
-    parts.append('<circle cx="58" cy="36" r="5" fill="#22c55e" class="led" filter="url(#glow)"/>')
-    parts.append(f'<text x="72" y="40" fill="{silk}" class="mono" font-size="12" '
-                 f'opacity="0.8">online</text>')
+    # ---- pill de estado ----
+    parts.append('<g class="fade">')
+    parts.append('<rect x="56" y="40" width="186" height="30" rx="15" fill="#0d1640" '
+                 'stroke="#2dd4bf" stroke-width="1.2"/>')
+    parts.append('<circle cx="76" cy="55" r="5" fill="#34d399" class="led" filter="url(#glow)"/>')
+    parts.append(f'<text x="92" y="59" fill="{silk}" class="mono" font-size="12" '
+                 f'letter-spacing="1">available . open to work</text>')
+    parts.append('</g>')
 
-    # ---- texto heroe (identidad) ----
-    parts.append(f'<text x="60" y="148" fill="{silk}" font-size="40" font-weight="700" '
-                 f'letter-spacing="0.5" class="fade">{esc(FULL_NAME)}</text>')
-    parts.append(f'<text x="62" y="184" fill="{gold}" class="mono fade2" font-size="20" '
-                 f'font-weight="600" letter-spacing="3">aka {esc(ALIAS)}</text>')
-    parts.append('<g class="fade3">')
-    parts.append(f'<text x="62" y="224" fill="{accent}" class="mono" font-size="14" '
-                 f'opacity="0.85">{esc(role)}</text>')
-    parts.append(f'<text x="62" y="258" fill="{silk}" class="mono" font-size="14" '
-                 f'opacity="0.9">&gt; building<tspan fill="{silk}"> _</tspan>'
-                 f'<tspan class="cur" fill="{gold}">|</tspan></text>')
+    # ---- nombre con gradiente animado ----
+    parts.append(f'<text x="58" y="156" font-size="38" font-weight="800" letter-spacing="0.5" '
+                 f'fill="url(#ng)" class="name">{esc(FULL_NAME)}</text>')
+    parts.append(f'<text x="60" y="198" fill="#f0abfc" class="mono fade2" font-size="20" '
+                 f'font-weight="700" letter-spacing="4" filter="url(#glow)">aka {esc(ALIAS)}</text>')
+
+    # ---- roles rotativos + cursor ----
+    parts.append('<g class="fade2">')
+    for i, ph in enumerate(roles[:3]):
+        parts.append(f'<text x="60" y="244" fill="#9fb3d8" class="mono role" font-size="15" '
+                     f'style="animation-delay:{i * 3:.0f}s">&gt; {esc(ph)}'
+                     f'<tspan class="cur" fill="#fbbf24">_</tspan></text>')
+    parts.append('</g>')
+
+    # ---- stack chips (mini etiquetas de colores) ----
+    chips = [("TypeScript", "#3178c6"), ("Python", "#3572A5"), ("C / C++", "#f34b7d"),
+             ("Verilog", "#848bf3")]
+    xx = 60
+    parts.append('<g class="fade2">')
+    for label, c in chips:
+        bw = 16 + len(label) * 8
+        parts.append(f'<rect x="{xx}" y="276" width="{bw}" height="26" rx="13" fill="#0d1640" '
+                     f'stroke="{c}" stroke-width="1.3"/>')
+        parts.append(f'<circle cx="{xx + 13}" cy="289" r="4" fill="{c}"/>')
+        parts.append(f'<text x="{xx + 24}" y="293" fill="{silk}" class="mono" font-size="12">'
+                     f'{esc(label)}</text>')
+        xx += bw + 12
     parts.append('</g>')
 
     parts.append('</svg>')
@@ -506,6 +564,108 @@ def lang_switch(cur):
     return '<div align="center">\n\n' + ' &nbsp; '.join(cells) + '\n\n</div>'
 
 
+# --------------------------------------------------------------------------- #
+#  Badges (estilo markdown-badges) + widgets auto-actualizables                #
+# --------------------------------------------------------------------------- #
+_BG = "0b1230"
+EMAIL = "josenicole2000@gmail.com"
+
+
+def _enc(s):
+    return (s.replace("-", "--").replace("_", "__").replace(" ", "%20")
+             .replace("+", "%2B").replace("#", "%23").replace("&", "%26"))
+
+
+def badge(label, color, logo=None, logocolor="white"):
+    url = f"https://img.shields.io/badge/{_enc(label)}-{color}?style=for-the-badge"
+    if logo:
+        url += f"&logo={logo}&logoColor={logocolor}"
+    return f'<img src="{url}" alt="{esc(label)}" height="28"/>'
+
+
+TECH = [
+    ("Languages", "Lenguajes", [
+        badge("TypeScript", "3178C6", "typescript"),
+        badge("JavaScript", "F7DF1E", "javascript", "black"),
+        badge("Python", "3776AB", "python"), badge("C", "A8B9CC", "c", "black"),
+        badge("C++", "00599C", "cplusplus"), badge("Swift", "F05138", "swift"),
+        badge("Kotlin", "7F52FF", "kotlin"), badge("Java", "ED8B00", "openjdk"),
+        badge("Verilog", "848BF3"),
+    ]),
+    ("Web & UI", "Web y UI", [
+        badge("React", "20232A", "react", "61DAFB"), badge("HTML5", "E34F26", "html5"),
+        badge("CSS3", "1572B6", "css3"), badge("Node.js", "339933", "nodedotjs"),
+        badge("Vite", "646CFF", "vite"),
+    ]),
+    ("Tooling & DevOps", "Herramientas y DevOps", [
+        badge("Git", "F05032", "git"), badge("GitHub Actions", "2088FF", "githubactions"),
+        badge("Docker", "2496ED", "docker"), badge("Linux", "FCC624", "linux", "black"),
+        badge("VS Code", "007ACC", "visualstudiocode"),
+    ]),
+    ("AI & data", "IA y datos", [
+        badge("OpenAI", "412991", "openai"), badge("Anthropic", "191919", "anthropic"),
+        badge("Pandas", "150458", "pandas"), badge("NumPy", "013243", "numpy"),
+    ]),
+]
+
+
+def tech_section(lang):
+    blocks = []
+    for en, es, items in TECH:
+        label = en if lang == "en" else es
+        blocks.append(f"**{esc(label)}**  \n" + " ".join(items))
+    return '<div align="center">\n\n' + "\n\n".join(blocks) + "\n\n</div>"
+
+
+def quick_badges():
+    return (
+        f'<img src="https://komarev.com/ghpvc/?username={USERNAME}&color=22d3ee&'
+        f'style=for-the-badge&label=PROFILE+VIEWS" alt="views"/>\n'
+        f'<img src="https://img.shields.io/github/followers/{USERNAME}?style=for-the-badge&'
+        f'logo=github&color=a855f7&labelColor={_BG}" alt="followers"/>\n'
+        f'<img src="https://img.shields.io/badge/Focus-developer%20tools%20%26%20AI-f472b6?'
+        f'style=for-the-badge&labelColor={_BG}" alt="focus"/>')
+
+
+def stats_card():
+    return (f'<img height="175" src="https://github-readme-stats.vercel.app/api?'
+            f'username={USERNAME}&show_icons=true&hide_border=true&count_private=true&'
+            f'include_all_commits=true&bg_color={_BG}&title_color=f472b6&text_color=9fb3d8&'
+            f'icon_color=22d3ee" alt="GitHub stats"/>')
+
+
+def streak_card():
+    return (f'<img height="175" src="https://streak-stats.demolab.com/?'
+            f'user={USERNAME}&hide_border=true&background={_BG}&stroke=2dd4bf&ring=f472b6&'
+            f'fire=fbbf24&currStreakLabel=22d3ee&sideLabels=9fb3d8&dates=6b7aa8&'
+            f'currStreakNum=eaf2ff&sideNums=eaf2ff&dayLabels=9fb3d8" alt="streak"/>')
+
+
+def activity_graph():
+    return (f'<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?'
+            f'username={USERNAME}&bg_color={_BG}&color=f472b6&line=22d3ee&point=fbbf24&'
+            f'area=true&hide_border=true" alt="contribution activity"/>')
+
+
+def trophies():
+    return (f'<img src="https://github-profile-trophy.vercel.app/?username={USERNAME}&'
+            f'theme=algolia&no-frame=true&no-bg=true&column=7&margin-w=6&margin-h=6" '
+            f'alt="trophies"/>')
+
+
+def snake_img():
+    base = f"https://raw.githubusercontent.com/{USERNAME}/{USERNAME}/output"
+    return f'<img width="100%" src="{base}/snake-dark.svg" alt="contribution snake"/>'
+
+
+def connect_section():
+    return (
+        f'<a href="mailto:{EMAIL}"><img src="https://img.shields.io/badge/Email-{_BG}?'
+        f'style=for-the-badge&logo=gmail&logoColor=f472b6" alt="Email"/></a>\n'
+        f'<a href="https://github.com/{USERNAME}"><img src="https://img.shields.io/badge/'
+        f'GitHub-{_BG}?style=for-the-badge&logo=github&logoColor=22d3ee" alt="GitHub"/></a>')
+
+
 def build_readme(lang, projects_table, updated):
     S = STRINGS[lang]
     bullets = "\n".join("- " + b for b in S["bullets"])
@@ -514,6 +674,28 @@ def build_readme(lang, projects_table, updated):
 <div align="center">
 
 <img src="./assets/header-{lang}.svg" width="100%" alt="{esc(FULL_NAME)}" />
+
+{quick_badges()}
+
+</div>
+
+<br/>
+
+## {S['h_stats']}
+
+<div align="center">
+
+{stats_card()}
+&nbsp;
+{streak_card()}
+
+</div>
+
+## {S['h_activity']}
+
+<div align="center">
+
+{activity_graph()}
 
 </div>
 
@@ -531,9 +713,33 @@ def build_readme(lang, projects_table, updated):
 
 <br/>
 
+## {S['h_tech']}
+
+{tech_section(lang)}
+
+<br/>
+
 ## {S['selected']}
 
 {projects_table}
+
+<br/>
+
+## {S['h_trophies']}
+
+<div align="center">
+
+{trophies()}
+
+</div>
+
+## {S['h_snake']}
+
+<div align="center">
+
+{snake_img()}
+
+</div>
 
 <br/>
 
@@ -544,6 +750,16 @@ def build_readme(lang, projects_table, updated):
 {bullets}
 
 {S['generated']}
+
+<br/>
+
+## {S['h_connect']}
+
+<div align="center">
+
+{connect_section()}
+
+</div>
 
 <br/>
 
@@ -577,7 +793,7 @@ def main():
 
     for l in LANGS:
         S = STRINGS[l]
-        write(os.path.join(ASSETS, f"header-{l}.svg"), header_svg(top_lang, S["role"]))
+        write(os.path.join(ASSETS, f"header-{l}.svg"), header_svg(top_lang, S["roles"]))
         write(os.path.join(ASSETS, f"languages-{l}.svg"),
               languages_svg(langs, S["lang_title"], S["lang_note"]))
         metrics = list(zip(S["stats"], values))
