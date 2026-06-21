@@ -27,7 +27,7 @@ README = os.path.join(os.path.dirname(os.path.abspath(__file__)), "README.md")
 
 # Identidad (lo unico curado a mano; el resto es 100% derivado de datos).
 FULL_NAME = "Jose Nicolas Sanchez Zorrilla"
-ALIAS = "NIKO . VANETTI"
+ALIAS = "Niko_Vanetti"
 
 # Textos por idioma. La identidad (nombre/alias) no se traduce; todo lo demas si.
 LANGS = ["es", "en"]  # primero el default (es = README.md)
@@ -373,7 +373,7 @@ def header_svg(top_lang, roles):
                  f'stroke-linejoin="round" class="name">{esc(FULL_NAME)}</text>')
     parts.append(f'<text x="60" y="198" fill="#f0abfc" class="mono fade2" font-size="20" '
                  f'font-weight="700" letter-spacing="4" stroke="#000000" stroke-width="3" '
-                 f'paint-order="stroke" stroke-linejoin="round">aka {esc(ALIAS)}</text>')
+                 f'paint-order="stroke" stroke-linejoin="round">{esc(ALIAS)}</text>')
 
     # ---- roles rotativos + cursor ----
     parts.append('<g class="fade2">')
