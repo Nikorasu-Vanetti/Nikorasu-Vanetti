@@ -72,6 +72,7 @@
 
 | Proyecto | Stack | Qué es | Estado |
 | --- | --- | --- | --- |
+| **mercurio-consola** | `TypeScript` | - | privado |
 | **niko-ide-verilog** | `TypeScript` | - | privado |
 | **niko-agents** | `Python` | - | privado |
 | **Jose_Sanchez_PM_2025_C2** | `C` | Repositorio con las tareas de Programación para Mecatrónicos del C2 del ITLA. | privado |
@@ -119,6 +120,6 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <div align="center">
 
-_Última actualización: 2026-06-21 18:46 UTC_
+_Última actualización: 2026-06-22 08:30 UTC_
 
 </div>
