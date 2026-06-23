@@ -72,6 +72,7 @@
 
 | Proyecto | Stack | Qué es | Estado |
 | --- | --- | --- | --- |
+| **mercurio-experience** | `TypeScript` | - | privado |
 | **mercurio-consola** | `TypeScript` | - | privado |
 | **niko-ide-verilog** | `TypeScript` | - | privado |
 | **niko-agents** | `Python` | - | privado |
@@ -120,6 +121,6 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <div align="center">
 
-_Última actualización: 2026-06-22 08:30 UTC_
+_Última actualización: 2026-06-23 07:33 UTC_
 
 </div>
