@@ -8,8 +8,8 @@
 
 <img src="./assets/header-es.svg" width="100%" alt="Niko-Vanetti" />
 
-<img src="https://komarev.com/ghpvc/?username=Nikorasu-Vanetti&color=22d3ee&style=for-the-badge&label=PROFILE+VIEWS" alt="views"/>
-<img src="https://img.shields.io/github/followers/Nikorasu-Vanetti?style=for-the-badge&logo=github&color=a855f7&labelColor=0b1230" alt="followers"/>
+<img src="https://komarev.com/ghpvc/?username=Niko-Vanetti&color=22d3ee&style=for-the-badge&label=PROFILE+VIEWS" alt="views"/>
+<img src="https://img.shields.io/github/followers/Niko-Vanetti?style=for-the-badge&logo=github&color=a855f7&labelColor=0b1230" alt="followers"/>
 <img src="https://img.shields.io/badge/Focus-developer%20tools%20%26%20AI-f472b6?style=for-the-badge&labelColor=0b1230" alt="focus"/>
 
 </div>
@@ -20,9 +20,9 @@
 
 <div align="center">
 
-<img height="175" src="https://github-readme-stats.vercel.app/api?username=Nikorasu-Vanetti&show_icons=true&hide_border=true&count_private=true&include_all_commits=true&custom_title=Niko%27s%20GitHub%20stats&bg_color=0b1230&title_color=f472b6&text_color=9fb3d8&icon_color=22d3ee" alt="Niko GitHub stats"/>
+<img height="175" src="https://github-readme-stats.vercel.app/api?username=Niko-Vanetti&show_icons=true&hide_border=true&count_private=true&include_all_commits=true&custom_title=Niko%27s%20GitHub%20stats&bg_color=0b1230&title_color=f472b6&text_color=9fb3d8&icon_color=22d3ee" alt="Niko GitHub stats"/>
 &nbsp;
-<img height="175" src="https://streak-stats.demolab.com/?user=Nikorasu-Vanetti&hide_border=true&background=0b1230&stroke=2dd4bf&ring=f472b6&fire=fbbf24&currStreakLabel=22d3ee&sideLabels=9fb3d8&dates=6b7aa8&currStreakNum=eaf2ff&sideNums=eaf2ff&dayLabels=9fb3d8" alt="streak"/>
+<img height="175" src="https://streak-stats.demolab.com/?user=Niko-Vanetti&hide_border=true&background=0b1230&stroke=2dd4bf&ring=f472b6&fire=fbbf24&currStreakLabel=22d3ee&sideLabels=9fb3d8&dates=6b7aa8&currStreakNum=eaf2ff&sideNums=eaf2ff&dayLabels=9fb3d8" alt="streak"/>
 
 </div>
 
@@ -30,7 +30,7 @@
 
 <div align="center">
 
-<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=Nikorasu-Vanetti&custom_title=Niko%27s%20contribution%20graph&bg_color=0b1230&color=f472b6&line=22d3ee&point=fbbf24&area=true&hide_border=true" alt="Niko contribution activity"/>
+<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=Niko-Vanetti&custom_title=Niko%27s%20contribution%20graph&bg_color=0b1230&color=f472b6&line=22d3ee&point=fbbf24&area=true&hide_border=true" alt="Niko contribution activity"/>
 
 </div>
 
@@ -88,7 +88,7 @@
 
 <div align="center">
 
-<img width="100%" src="https://raw.githubusercontent.com/Nikorasu-Vanetti/Nikorasu-Vanetti/output/snake-dark.svg" alt="contribution snake"/>
+<img width="100%" src="https://raw.githubusercontent.com/Niko-Vanetti/Niko-Vanetti/output/snake-dark.svg" alt="contribution snake"/>
 
 </div>
 
@@ -113,7 +113,7 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <a href="https://www.linkedin.com/in/jos%C3%A9-nicolas-s%C3%A1nchez-zorrilla-76990b280/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
 <a href="mailto:josenicole2000@gmail.com"><img src="https://img.shields.io/badge/Email-0b1230?style=for-the-badge&logo=gmail&logoColor=f472b6" alt="Email"/></a>
-<a href="https://github.com/Nikorasu-Vanetti"><img src="https://img.shields.io/badge/GitHub-0b1230?style=for-the-badge&logo=github&logoColor=22d3ee" alt="GitHub"/></a>
+<a href="https://github.com/Niko-Vanetti"><img src="https://img.shields.io/badge/GitHub-0b1230?style=for-the-badge&logo=github&logoColor=22d3ee" alt="GitHub"/></a>
 
 </div>
 

@@ -20,7 +20,7 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timezone
 
-USERNAME = "Nikorasu-Vanetti"
+USERNAME = "Niko-Vanetti"
 API = "https://api.github.com"
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 README = os.path.join(os.path.dirname(os.path.abspath(__file__)), "README.md")
