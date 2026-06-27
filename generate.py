@@ -26,8 +26,8 @@ ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 README = os.path.join(os.path.dirname(os.path.abspath(__file__)), "README.md")
 
 # Identidad (lo unico curado a mano; el resto es 100% derivado de datos).
-FULL_NAME = "Jose Nicolas Sanchez Zorrilla"
-ALIAS = "Niko_Vanetti"
+FULL_NAME = "Niko-Vanetti"
+ALIAS = "@Nikorasu-Vanetti"
 
 # Textos por idioma. La identidad (nombre/alias) no se traduce; todo lo demas si.
 LANGS = ["es", "en"]  # primero el default (es = README.md)
@@ -307,8 +307,8 @@ def header_svg(top_lang, roles):
     parts.append('</g>')
 
     # ---- nombre con gradiente animado ----
-    parts.append(f'<text x="58" y="156" font-size="38" font-weight="800" letter-spacing="0.5" '
-                 f'fill="#f4f8ff" stroke="#000000" stroke-width="4" paint-order="stroke" '
+    parts.append(f'<text x="58" y="158" font-size="50" font-weight="800" letter-spacing="0.5" '
+                 f'fill="#f4f8ff" stroke="#000000" stroke-width="5" paint-order="stroke" '
                  f'stroke-linejoin="round" class="name">{esc(FULL_NAME)}</text>')
     parts.append(f'<text x="60" y="198" fill="#7dd3fc" class="mono fade2" font-size="20" '
                  f'font-weight="700" letter-spacing="4" stroke="#000000" stroke-width="3" '
@@ -589,8 +589,9 @@ def quick_badges():
 def stats_card():
     return (f'<img height="175" src="https://github-readme-stats.vercel.app/api?'
             f'username={USERNAME}&show_icons=true&hide_border=true&count_private=true&'
-            f'include_all_commits=true&bg_color={_BG}&title_color=f472b6&text_color=9fb3d8&'
-            f'icon_color=22d3ee" alt="GitHub stats"/>')
+            f'include_all_commits=true&custom_title=Niko%27s%20GitHub%20stats&'
+            f'bg_color={_BG}&title_color=f472b6&text_color=9fb3d8&'
+            f'icon_color=22d3ee" alt="Niko GitHub stats"/>')
 
 
 def streak_card():
@@ -602,8 +603,9 @@ def streak_card():
 
 def activity_graph():
     return (f'<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?'
-            f'username={USERNAME}&bg_color={_BG}&color=f472b6&line=22d3ee&point=fbbf24&'
-            f'area=true&hide_border=true" alt="contribution activity"/>')
+            f'username={USERNAME}&custom_title=Niko%27s%20contribution%20graph&'
+            f'bg_color={_BG}&color=f472b6&line=22d3ee&point=fbbf24&'
+            f'area=true&hide_border=true" alt="Niko contribution activity"/>')
 
 
 def trophies():

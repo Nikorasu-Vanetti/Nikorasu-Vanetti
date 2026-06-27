@@ -6,7 +6,7 @@
 
 <div align="center">
 
-<img src="./assets/header-es.svg" width="100%" alt="Jose Nicolas Sanchez Zorrilla" />
+<img src="./assets/header-es.svg" width="100%" alt="Niko-Vanetti" />
 
 <img src="https://komarev.com/ghpvc/?username=Nikorasu-Vanetti&color=22d3ee&style=for-the-badge&label=PROFILE+VIEWS" alt="views"/>
 <img src="https://img.shields.io/github/followers/Nikorasu-Vanetti?style=for-the-badge&logo=github&color=a855f7&labelColor=0b1230" alt="followers"/>
@@ -20,7 +20,7 @@
 
 <div align="center">
 
-<img height="175" src="https://github-readme-stats.vercel.app/api?username=Nikorasu-Vanetti&show_icons=true&hide_border=true&count_private=true&include_all_commits=true&bg_color=0b1230&title_color=f472b6&text_color=9fb3d8&icon_color=22d3ee" alt="GitHub stats"/>
+<img height="175" src="https://github-readme-stats.vercel.app/api?username=Nikorasu-Vanetti&show_icons=true&hide_border=true&count_private=true&include_all_commits=true&custom_title=Niko%27s%20GitHub%20stats&bg_color=0b1230&title_color=f472b6&text_color=9fb3d8&icon_color=22d3ee" alt="Niko GitHub stats"/>
 &nbsp;
 <img height="175" src="https://streak-stats.demolab.com/?user=Nikorasu-Vanetti&hide_border=true&background=0b1230&stroke=2dd4bf&ring=f472b6&fire=fbbf24&currStreakLabel=22d3ee&sideLabels=9fb3d8&dates=6b7aa8&currStreakNum=eaf2ff&sideNums=eaf2ff&dayLabels=9fb3d8" alt="streak"/>
 
@@ -30,7 +30,7 @@
 
 <div align="center">
 
-<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=Nikorasu-Vanetti&bg_color=0b1230&color=f472b6&line=22d3ee&point=fbbf24&area=true&hide_border=true" alt="contribution activity"/>
+<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=Nikorasu-Vanetti&custom_title=Niko%27s%20contribution%20graph&bg_color=0b1230&color=f472b6&line=22d3ee&point=fbbf24&area=true&hide_border=true" alt="Niko contribution activity"/>
 
 </div>
 
@@ -77,10 +77,10 @@
 | **niko-ide-verilog** | `TypeScript` | - | privado |
 | **niko-agents** | `Python` | - | privado |
 | **Jose_Sanchez_PM_2025_C2** | `C` | Repositorio con las tareas de Programación para Mecatrónicos del C2 del ITLA. | privado |
-| **[game-guard](https://github.com/Nikorasu-Vanetti/game-guard)** | `Python` | Bloqueo de videojuegos por horario en Windows | público |
+| **[game-guard](https://github.com/Niko-Vanetti/game-guard)** | `Python` | Bloqueo de videojuegos por horario en Windows | público |
 | **moneyboxrd-ios** | `Swift` | - | privado |
 | **moneyboxrd-android** | `Java` | - | privado |
-| **[Windows-Startup-Manager](https://github.com/Nikorasu-Vanetti/Windows-Startup-Manager)** | `Python` | Aplicación en Python con interfaz gráfica para optimizar Windows. Permite gestionar programas de inicio y deshabilitar servicios en segundo plano no esenciales de forma totalmente segura. Esta abierta a modificaciones! | público |
+| **[Windows-Startup-Manager](https://github.com/Niko-Vanetti/Windows-Startup-Manager)** | `Python` | Aplicación en Python con interfaz gráfica para optimizar Windows. Permite gestionar programas de inicio y deshabilitar servicios en segundo plano no esenciales de forma totalmente segura. Esta abierta a modificaciones! | público |
 
 <br/>
 
