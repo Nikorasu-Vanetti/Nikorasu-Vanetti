@@ -72,12 +72,12 @@
 
 | Proyecto | Stack | Qué es | Estado |
 | --- | --- | --- | --- |
+| **[game-guard](https://github.com/Niko-Vanetti/game-guard)** | `Python` | Bloqueo de videojuegos por horario en Windows | público |
 | **mercurio-experience** | `TypeScript` | - | privado |
 | **mercurio-consola** | `TypeScript` | - | privado |
 | **niko-ide-verilog** | `TypeScript` | - | privado |
 | **niko-agents** | `Python` | - | privado |
 | **Jose_Sanchez_PM_2025_C2** | `C` | Repositorio con las tareas de Programación para Mecatrónicos del C2 del ITLA. | privado |
-| **[game-guard](https://github.com/Niko-Vanetti/game-guard)** | `Python` | Bloqueo de videojuegos por horario en Windows | público |
 | **moneyboxrd-ios** | `Swift` | - | privado |
 | **moneyboxrd-android** | `Java` | - | privado |
 | **[Windows-Startup-Manager](https://github.com/Niko-Vanetti/Windows-Startup-Manager)** | `Python` | Aplicación en Python con interfaz gráfica para optimizar Windows. Permite gestionar programas de inicio y deshabilitar servicios en segundo plano no esenciales de forma totalmente segura. Esta abierta a modificaciones! | público |
@@ -121,6 +121,6 @@ Todo este perfil está generado por código. La cabecera, las métricas, el grá
 
 <div align="center">
 
-_Última actualización: 2026-06-28 07:39 UTC_
+_Última actualización: 2026-06-29 08:09 UTC_
 
 </div>
